@@ -91,7 +91,6 @@ namespace ExpeditionArtifacts
 	var stringListT = string.Join(separator, ST, TA, TB, TC, TD);
 	var stringListD = string.Join(separator, ST, DA, DB, DC, DD);	
 	var textSizeT = Graphics.MeasureText(stringListT);	
-	var textSizeD = Graphics.MeasureText(stringListD);		
 	var boxPos = new Vector2(textSizeT.X + Settings.PosX, textSizeT.Y + Settings.PosY);
 	var boxPos2 = new Vector2(textSizeT.X + Settings.PosX, textSizeT.Y + Settings.PosY);	
 	var boxSize = new Vector2(textSizeT.X, textSizeT.Y);		
@@ -100,12 +99,20 @@ namespace ExpeditionArtifacts
 
 
 
-Graphics.DrawText(stringListT, textPos, Settings.TextColor);
-Graphics.DrawText(stringListD, textPos2, Settings.TextColor);
-Graphics.DrawText(Tujen, textPos, Color.Gold);
-Graphics.DrawText(Dannig, textPos2, Color.Orange);
-Graphics.DrawBox(new RectangleF(boxPos.X - 5, boxPos.Y - 3, boxSize.X + 10, boxSize.Y + 6), Settings.BackgroundColor);
-Graphics.DrawBox(new RectangleF(boxPos2.X + 120, boxPos2.Y - 3, boxSize.X + 15, boxSize.Y + 6), Settings.BackgroundColor);
+if (Settings.TujenEnabled)
+	{
+		Graphics.DrawText(stringListT, textPos, Settings.TextColor);
+		Graphics.DrawBox(new RectangleF(boxPos.X - 5, boxPos.Y - 3, boxSize.X + 10, boxSize.Y + 6), Settings.BackgroundColor);
+		Graphics.DrawText(Tujen, textPos, Settings.TujenTitleColor);
+
+	}
+if (Settings.DannigEnabled)
+	{	
+		Graphics.DrawText(stringListD, textPos2, Settings.TextColor);
+		Graphics.DrawText(Dannig, textPos2, Settings.DannigTitleColor);
+		Graphics.DrawBox(new RectangleF(boxPos2.X + 120, boxPos2.Y - 3, boxSize.X + 15, boxSize.Y + 6), Settings.BackgroundColor);
+
+	}
 
 
         }
