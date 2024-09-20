@@ -17,12 +17,19 @@ namespace ExpeditionArtifacts
 {
     public class ExpeditionArtifacts : BaseSettingsPlugin<ExpeditionArtifactsSettings>
     {
-        private string Tujen = "";
+	private string ST = "";
 	private string TA = "";
         private string TB = "";		
         private string TC = "";		
         private string TD = "";
-        private bool CanRender;
+        private string Tujen = "";
+	private string DA = "";
+        private string DB = "";		
+        private string DC = "";		
+        private string DD = "";	
+        private string Dannig = "";			
+        
+	private bool CanRender;	
         private Vector2N drawTextVector2;
 
 
@@ -41,23 +48,29 @@ namespace ExpeditionArtifacts
         {
 
             {
-
-
                 var TujenA = GameController.IngameState.ServerData.LesserBlackScytheArtifacts;
 		var TujenB = GameController.IngameState.ServerData.GreaterBlackScytheArtifacts;
                 var TujenC = GameController.IngameState.ServerData.GrandBlackScytheArtifacts;
-		var TujenD = GameController.IngameState.ServerData.ExceptionalBlackScytheArtifacts;				
+		var TujenD = GameController.IngameState.ServerData.ExceptionalBlackScytheArtifacts;	
+                var DannigA = GameController.IngameState.ServerData.LesserSunArtifacts;
+		var DannigB = GameController.IngameState.ServerData.GreaterSunArtifacts;
+                var DannigC = GameController.IngameState.ServerData.GrandSunArtifacts;
+		var DannigD = GameController.IngameState.ServerData.ExceptionalSunArtifacts;			
 
                 CanRender = true;
-		Tujen = $"Tujen Artifacts:\n";
+		
+		ST = $"";
 		TA = $"Lesser: {TujenA}";
 		TB = $"Greater: {TujenB}";
 		TC = $"Grand: {TujenC}";
 		TD = $"Exceptional: {TujenD}";				
-
- 
-		
-	    }
+		DA = $"Lesser: {DannigA}";
+		DB = $"Greater: {DannigB}";
+		DC = $"Grand: {DannigC}";
+		DD = $"Exceptional: {DannigD}";	
+		Tujen = $"Tujen Artifacts:\n";
+		Dannig = $"Dannig Artifacts:\n";
+ 	    }
 		
 	}
 		
@@ -74,18 +87,25 @@ namespace ExpeditionArtifacts
 
 
     };
-        var separator = "\n";
-	var stringList = string.Join(separator, Tujen, TA, TB, TC, TD);
-	var textSize = Graphics.MeasureText(stringList);
-	var boxPos = new Vector2(textSize.X + Settings.PosX, textSize.Y + Settings.PosY);
-	var boxSize = new Vector2(textSize.X, textSize.Y);
-	var textPos = new Vector2(boxPos.X, boxPos.Y);
-        
+    var separator = "\n";
+	var stringListT = string.Join(separator, ST, TA, TB, TC, TD);
+	var stringListD = string.Join(separator, ST, DA, DB, DC, DD);	
+	var textSizeT = Graphics.MeasureText(stringListT);	
+	var textSizeD = Graphics.MeasureText(stringListD);		
+	var boxPos = new Vector2(textSizeT.X + Settings.PosX, textSizeT.Y + Settings.PosY);
+	var boxPos2 = new Vector2(textSizeT.X + Settings.PosX, textSizeT.Y + Settings.PosY);	
+	var boxSize = new Vector2(textSizeT.X, textSizeT.Y);		
+	var textPos = new Vector2(boxPos.X, boxPos.Y);	
+	var textPos2 = new Vector2(boxPos2.X + 125, boxPos2.Y);	
 
-Graphics.DrawText(stringList, textPos, Settings.TextColor);
+
+
+Graphics.DrawText(stringListT, textPos, Settings.TextColor);
+Graphics.DrawText(stringListD, textPos2, Settings.TextColor);
 Graphics.DrawText(Tujen, textPos, Color.Gold);
+Graphics.DrawText(Dannig, textPos2, Color.Orange);
 Graphics.DrawBox(new RectangleF(boxPos.X - 5, boxPos.Y - 3, boxSize.X + 10, boxSize.Y + 6), Settings.BackgroundColor);
-
+Graphics.DrawBox(new RectangleF(boxPos2.X + 120, boxPos2.Y - 3, boxSize.X + 15, boxSize.Y + 6), Settings.BackgroundColor);
 
 
         }
